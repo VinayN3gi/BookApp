@@ -25,6 +25,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -36,15 +37,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.bookapp.domain.Routes
 import com.example.bookapp.presentation.icons.Lock
 import com.example.bookapp.presentation.icons.Person
 import com.example.bookapp.ui.theme.signikaFontFamily
 
 @Composable
-fun SignInScreen()
+fun SignInScreen(signInViewModel: SignInViewModel= hiltViewModel(),navController: NavController)
 {
-    val password=remember{ mutableStateOf<String>("")}
-    val email=remember{ mutableStateOf<String>("")}
+    val password=signInViewModel.password.collectAsState()
+    val email=signInViewModel.email.collectAsState()
     Column(modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).systemBarsPadding().navigationBarsPadding(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
     {
         Text(text="Sign In", fontFamily = signikaFontFamily, fontWeight = FontWeight.SemiBold, fontSize = 50.sp, modifier = Modifier.fillMaxWidth(.9f), textAlign = TextAlign.Center)
@@ -53,7 +57,7 @@ fun SignInScreen()
 
         //Email Text field
         TextField(onValueChange = {
-            email.value=it
+          signInViewModel.changeEmail(it)
         },
             value = email.value,
             textStyle = TextStyle(
@@ -80,9 +84,9 @@ fun SignInScreen()
 
         //Password Text field
         TextField(onValueChange = {
-            password.value=it
+            signInViewModel.changePassword(it)
         },
-            value = email.value,
+            value = password.value,
             textStyle = TextStyle(
                 fontFamily = signikaFontFamily,
                 fontWeight = FontWeight.Light,
@@ -115,7 +119,9 @@ fun SignInScreen()
 
         Spacer(modifier = Modifier.height(35.dp))
 
-        Button(onClick = {},
+        Button(onClick = {
+            navController.navigate(Routes.LogIn.routes)
+        },
             modifier = Modifier.fillMaxWidth(.6f).height(45.dp), shape = RoundedCornerShape(2.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Black
@@ -127,12 +133,4 @@ fun SignInScreen()
 
     }
 
-}
-
-
-@Composable
-@Preview(showBackground = true, showSystemUi = true)
-fun SignInScreenPreview()
-{
-    SignInScreen()
 }
