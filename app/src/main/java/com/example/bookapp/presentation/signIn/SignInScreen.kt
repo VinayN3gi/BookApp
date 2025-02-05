@@ -29,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,12 +45,15 @@ import com.example.bookapp.domain.Routes
 import com.example.bookapp.presentation.icons.Lock
 import com.example.bookapp.presentation.icons.Person
 import com.example.bookapp.ui.theme.signikaFontFamily
+import kotlinx.coroutines.launch
 
 @Composable
 fun SignInScreen(signInViewModel: SignInViewModel= hiltViewModel(),navController: NavController)
 {
+    val coroutineScope= rememberCoroutineScope()
     val password=signInViewModel.password.collectAsState()
     val email=signInViewModel.email.collectAsState()
+    val loading=signInViewModel.loading.collectAsState()
     Column(modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).systemBarsPadding().navigationBarsPadding(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
     {
         Text(text="Sign Up", fontFamily = signikaFontFamily, fontWeight = FontWeight.SemiBold, fontSize = 50.sp, modifier = Modifier.fillMaxWidth(.9f), textAlign = TextAlign.Center)
@@ -125,14 +129,17 @@ fun SignInScreen(signInViewModel: SignInViewModel= hiltViewModel(),navController
         Spacer(modifier = Modifier.height(35.dp))
 
         Button(onClick = {
-            navController.navigate(Routes.LogIn.routes)
+            coroutineScope.launch {
+                signInViewModel.createUser()
+            }
+
         },
             modifier = Modifier.fillMaxWidth(.6f).height(45.dp), shape = RoundedCornerShape(2.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Black
             )
             ) {
-            Text(text="Sign Up", fontFamily = signikaFontFamily, fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.White)
+            Text(text=if(loading.value) "Loading..." else "Sign In", fontFamily = signikaFontFamily, fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.White)
         }
 
 

@@ -1,8 +1,11 @@
 package com.example.bookapp.di
 
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 
 @Module
@@ -10,6 +13,11 @@ import dagger.hilt.components.SingletonComponent
 object AppModule {
 
 
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
+    }
 
 
 }

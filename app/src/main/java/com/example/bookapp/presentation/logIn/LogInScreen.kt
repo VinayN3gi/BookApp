@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,6 +40,7 @@ import com.example.bookapp.domain.Routes
 import com.example.bookapp.presentation.icons.Lock
 import com.example.bookapp.presentation.icons.Person
 import com.example.bookapp.ui.theme.signikaFontFamily
+import kotlinx.coroutines.launch
 
 @Composable
 fun LogInScreen(logInViewModel: LogInViewModel= hiltViewModel(),navController: NavController)
@@ -46,6 +48,7 @@ fun LogInScreen(logInViewModel: LogInViewModel= hiltViewModel(),navController: N
 
     val password= logInViewModel.password.collectAsState()
     val email= logInViewModel.email.collectAsState()
+    val coroutineScope= rememberCoroutineScope()
     Column(modifier = Modifier.fillMaxSize().systemBarsPadding().navigationBarsPadding().padding(horizontal = 20.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally)
     {
         Text(text="Sign In", fontFamily = signikaFontFamily, fontWeight = FontWeight.SemiBold, fontSize = 50.sp, modifier = Modifier.fillMaxWidth(.9f), textAlign = TextAlign.Center)
@@ -121,7 +124,9 @@ fun LogInScreen(logInViewModel: LogInViewModel= hiltViewModel(),navController: N
         Spacer(modifier = Modifier.height(35.dp))
 
         Button(onClick = {
-
+            coroutineScope.launch {
+                logInViewModel.loginUser()
+            }
 
         },
             modifier = Modifier.fillMaxWidth(.6f).height(45.dp), shape = RoundedCornerShape(2.dp),
