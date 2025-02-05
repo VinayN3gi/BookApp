@@ -1,6 +1,7 @@
 package com.example.bookapp.presentation.signIn
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -51,7 +52,7 @@ fun SignInScreen(signInViewModel: SignInViewModel= hiltViewModel(),navController
     val email=signInViewModel.email.collectAsState()
     Column(modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).systemBarsPadding().navigationBarsPadding(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
     {
-        Text(text="Sign In", fontFamily = signikaFontFamily, fontWeight = FontWeight.SemiBold, fontSize = 50.sp, modifier = Modifier.fillMaxWidth(.9f), textAlign = TextAlign.Center)
+        Text(text="Sign Up", fontFamily = signikaFontFamily, fontWeight = FontWeight.SemiBold, fontSize = 50.sp, modifier = Modifier.fillMaxWidth(.9f), textAlign = TextAlign.Center)
         Spacer(modifier = Modifier.height(40.dp))
 
 
@@ -112,9 +113,13 @@ fun SignInScreen(signInViewModel: SignInViewModel= hiltViewModel(),navController
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center)
         {
-            Text(text="Don't have an account ?", fontFamily = signikaFontFamily, fontWeight = FontWeight.Normal, fontSize = 18.sp)
-            Spacer(modifier = Modifier.width(6.dp))
-            Text(text="Register Here", fontFamily = signikaFontFamily,fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = Color(0xFF9C27B0))
+            Text(text="Already have an account ?", fontFamily = signikaFontFamily, fontWeight = FontWeight.Normal, fontSize = 18.sp)
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(text="LogIn Here", fontFamily = signikaFontFamily,
+                modifier = Modifier.clickable {
+                    navController.navigate(Routes.LogIn.routes)
+                },
+                fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Color(0xFF9C27B0))
         }
 
         Spacer(modifier = Modifier.height(35.dp))
@@ -127,7 +132,7 @@ fun SignInScreen(signInViewModel: SignInViewModel= hiltViewModel(),navController
                 containerColor = Color.Black
             )
             ) {
-            Text(text="Sign In", fontFamily = signikaFontFamily, fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.White)
+            Text(text="Sign Up", fontFamily = signikaFontFamily, fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.White)
         }
 
 

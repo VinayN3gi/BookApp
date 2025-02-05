@@ -32,12 +32,12 @@ class MainActivity : ComponentActivity() {
                 {
                     composable(Routes.SignIn.routes)
                     {
-                        SignInScreen(navController)
+                        SignInScreen(navController = navController)
                     }
 
                     composable(Routes.LogIn.routes)
                     {
-                        LogInScreen()
+                        LogInScreen(navController = navController)
                     }
 
                 }
