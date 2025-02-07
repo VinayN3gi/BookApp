@@ -66,6 +66,10 @@ dependencies {
     //Navigation
     implementation(libs.androidx.navigation.compose)
 
+    //Retrofit
+    implementation(libs.converter.gson)
+    implementation(libs.retrofit)
+
 
 
     testImplementation(libs.junit)
