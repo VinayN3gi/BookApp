@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.bookapp.domain.Routes
+import com.example.bookapp.presentation.components.LoadingCircle
 import com.example.bookapp.presentation.icons.Lock
 import com.example.bookapp.presentation.icons.Person
 import com.example.bookapp.ui.theme.signikaFontFamily
@@ -48,6 +49,7 @@ fun LogInScreen(logInViewModel: LogInViewModel= hiltViewModel(),navController: N
 
     val password= logInViewModel.password.collectAsState()
     val email= logInViewModel.email.collectAsState()
+    val loading=logInViewModel.loading.collectAsState()
     val coroutineScope= rememberCoroutineScope()
     Column(modifier = Modifier.fillMaxSize().systemBarsPadding().navigationBarsPadding().padding(horizontal = 20.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally)
     {
@@ -134,7 +136,14 @@ fun LogInScreen(logInViewModel: LogInViewModel= hiltViewModel(),navController: N
                 containerColor = Color.Black
             )
         ) {
-            Text(text="Sign Up", fontFamily = signikaFontFamily, fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.White)
+            if(loading.value)
+            {
+                LoadingCircle()
+            }
+            else{
+                Text(text="Sign Up", fontFamily = signikaFontFamily, fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.White)
+            }
+
         }
 
     }

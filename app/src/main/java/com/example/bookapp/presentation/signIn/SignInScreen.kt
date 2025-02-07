@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.bookapp.domain.Routes
+import com.example.bookapp.presentation.components.LoadingCircle
 import com.example.bookapp.presentation.icons.Lock
 import com.example.bookapp.presentation.icons.Person
 import com.example.bookapp.ui.theme.signikaFontFamily
@@ -139,9 +140,15 @@ fun SignInScreen(signInViewModel: SignInViewModel= hiltViewModel(),navController
                 containerColor = Color.Black
             )
             ) {
-            Text(text=if(loading.value) "Loading..." else "Sign In", fontFamily = signikaFontFamily, fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.White)
-        }
+                if(loading.value)
+                {
+                    LoadingCircle()
+                }
+                else{
+                    Text(text="Sign In", fontFamily = signikaFontFamily, fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.White)
+                }
 
+        }
 
     }
 
