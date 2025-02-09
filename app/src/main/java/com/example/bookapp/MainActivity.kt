@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.bookapp.domain.Routes
+import com.example.bookapp.presentation.authcallback.AuthCallbackScreen
 import com.example.bookapp.presentation.logIn.LogInScreen
 import com.example.bookapp.presentation.signIn.SignInScreen
 import com.example.bookapp.ui.theme.BookAppTheme
@@ -40,6 +41,10 @@ class MainActivity : ComponentActivity() {
                         LogInScreen(navController = navController)
                     }
 
+                    composable(Routes.AuthCallback.routes)
+                    {
+                        AuthCallbackScreen(navController = navController)
+                    }
                 }
 
             }

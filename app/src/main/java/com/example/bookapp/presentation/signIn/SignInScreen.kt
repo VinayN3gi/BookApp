@@ -26,6 +26,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,6 +56,14 @@ fun SignInScreen(signInViewModel: SignInViewModel= hiltViewModel(),navController
     val password=signInViewModel.password.collectAsState()
     val email=signInViewModel.email.collectAsState()
     val loading=signInViewModel.loading.collectAsState()
+
+    LaunchedEffect(signInViewModel.navigationEvent) {
+        signInViewModel.navigationEvent.collect{
+            route->
+            navController.navigate(route)
+        }
+
+    }
     Column(modifier = Modifier.fillMaxSize().padding(horizontal = 20.dp).systemBarsPadding().navigationBarsPadding(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
     {
         Text(text="Sign Up", fontFamily = signikaFontFamily, fontWeight = FontWeight.SemiBold, fontSize = 50.sp, modifier = Modifier.fillMaxWidth(.9f), textAlign = TextAlign.Center)
