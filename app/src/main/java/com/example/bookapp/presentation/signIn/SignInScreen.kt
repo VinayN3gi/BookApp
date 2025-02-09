@@ -151,7 +151,7 @@ fun SignInScreen(signInViewModel: SignInViewModel= hiltViewModel(),navController
             ) {
                 if(loading.value)
                 {
-                    LoadingCircle()
+                    LoadingCircle(Color.White,30)
                 }
                 else{
                     Text(text="Sign In", fontFamily = signikaFontFamily, fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.White)

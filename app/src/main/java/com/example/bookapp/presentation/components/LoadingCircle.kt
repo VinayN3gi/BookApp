@@ -21,7 +21,7 @@ import com.example.bookapp.presentation.icons.LoaderCircle
 import kotlinx.coroutines.delay
 
 @Composable
-fun LoadingCircle()
+fun LoadingCircle(color:Color,size:Int)
 {
     val degree= produceState(initialValue = 0)
     {
@@ -37,7 +37,7 @@ fun LoadingCircle()
 
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally)
     {
-        Image(imageVector = LoaderCircle, contentDescription = "", modifier = Modifier.size(30.dp).rotate(degree.value.toFloat()), colorFilter = ColorFilter.tint(Color.White))
+        Image(imageVector = LoaderCircle, contentDescription = "", modifier = Modifier.size(size.dp).rotate(degree.value.toFloat()), colorFilter = ColorFilter.tint(color))
     }
 }
 
@@ -48,7 +48,7 @@ fun LoadingCirclePreview()
 {
     Column(modifier = Modifier.fillMaxSize().systemBarsPadding().navigationBarsPadding())
     {
-        LoadingCircle()
+        LoadingCircle(Color.White,30)
     }
 
 }
