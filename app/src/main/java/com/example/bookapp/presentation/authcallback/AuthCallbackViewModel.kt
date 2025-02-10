@@ -51,6 +51,7 @@ class AuthCallbackViewModel @Inject constructor(private val firebaseAuth: Fireba
                 {
                     Log.d("Tag",user.body()?.user.toString())
                     _id.value=user.body()?.user?.id
+                    _navigationEvent.emit(Routes.Home.routes)
                 }
                 else{
                     _id.value=null

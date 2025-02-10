@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.bookapp.data.remote.book.Book
+import com.example.bookapp.data.remote.book.BookApiInterface
 import com.example.bookapp.data.remote.user.User
 import com.example.bookapp.data.remote.user.UserApiInterface
 import com.example.bookapp.data.remote.user.UserReponse
@@ -23,7 +25,10 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInViewModel @Inject constructor(private val userApiInterface: UserApiInterface, private val firebaseAuth: FirebaseAuth):ViewModel() {
+class SignInViewModel @Inject constructor(
+    private val userApiInterface: UserApiInterface,
+    private val firebaseAuth: FirebaseAuth,
+):ViewModel() {
 
     private val _email=MutableStateFlow<String>("")
     private val _password=MutableStateFlow<String>("")
@@ -70,8 +75,6 @@ class SignInViewModel @Inject constructor(private val userApiInterface: UserApiI
             }
             _loading.value=false
     }
-
-
 
 
 }

@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BookAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = Routes.Home.routes)
+                NavHost(navController = navController, startDestination = Routes.SignIn.routes)
                 {
                     composable(Routes.SignIn.routes)
                     {

@@ -1,5 +1,6 @@
 package com.example.bookapp.di
 
+import com.example.bookapp.data.remote.book.BookApiInterface
 import com.example.bookapp.data.remote.user.UserApiInterface
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
@@ -39,6 +40,14 @@ object AppModule {
     {
         return retrofit.create(UserApiInterface::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideBookApi(retrofit: Retrofit): BookApiInterface
+    {
+        return retrofit.create(BookApiInterface::class.java)
+    }
+
 
 
 }
