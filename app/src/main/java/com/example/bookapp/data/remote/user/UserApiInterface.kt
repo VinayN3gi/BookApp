@@ -13,4 +13,6 @@ interface UserApiInterface {
 
     @POST("/user")
     suspend fun  postUser(@Body user: User) : Response<UserReponse>
+
+
 }
