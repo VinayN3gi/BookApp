@@ -1,16 +1,9 @@
 package com.example.bookapp.presentation.signIn
 
 import android.util.Log
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.example.bookapp.data.remote.book.Book
-import com.example.bookapp.data.remote.book.BookApiInterface
 import com.example.bookapp.data.remote.user.User
 import com.example.bookapp.data.remote.user.UserApiInterface
-import com.example.bookapp.data.remote.user.UserReponse
 import com.example.bookapp.domain.Routes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -19,9 +12,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
